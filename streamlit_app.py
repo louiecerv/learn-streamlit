@@ -57,7 +57,6 @@ def app():
         st.bar_chart(class_counts)
 
         if displaysummary:
-            st.write(df.describe())
             # Display other informative elements
             st.header("Data Information")
             st.write(df.describe())  # Include data summary
