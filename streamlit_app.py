@@ -37,26 +37,26 @@ def app():
             index_label="#",
         ))
 
-    # Add download button with enhanced error handling and feedback
-    csv_file = BytesIO()
-    data.to_csv(csv_file, index=False)
-    csv_file.seek(0)
+        # Add download button with enhanced error handling and feedback
+        csv_file = BytesIO()
+        data.to_csv(csv_file, index=False)
+        csv_file.seek(0)
 
-    download_button = st.download_button(
-        label="Download CSV",
-        data=csv_file,
-        file_name="dataset.csv",
-        mime="text/csv",
-        on_click=None,  # Disable immediate download on page load
-    )
+        download_button = st.download_button(
+            label="Download CSV",
+            data=csv_file,
+            file_name="dataset.csv",
+            mime="text/csv",
+            on_click=None,  # Disable immediate download on page load
+        )
 
-    if download_button:
-        try:
-            st.success("Download successful!")
-        except Exception as e:
-            st.error(f"Download failed: {e}")
+        if download_button:
+            try:
+                st.success("Download successful!")
+            except Exception as e:
+                st.error(f"Download failed: {e}")
 
-st.write("You can now explore and analyze this dataset for various purposes.")
+        st.write("You can now explore and analyze this dataset for various purposes.")
     
 #run the app
 if __name__ == "__main__":
