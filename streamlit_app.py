@@ -7,9 +7,10 @@ from io import BytesIO
 # Define the Streamlit app
 def app():
     # Display the DataFrame with formatting
-    st.title("Sample Dataset with Features and Classes")
+    st.title("Generate Dataset with Features and Classes")
     st.write(
-        "This dataset is generated with balanced classes and informative features to facilitate exploration and analysis."
+        """This app generates  dataset with balanced classes 
+        and informative features to facilitate exploration and analysis."""
         )
 
     if st.button('Start'):
