@@ -70,9 +70,7 @@ def app():
         st.header("Data Information")
         st.write(df.describe())  # Include data summary
 
-        # Add interactivity and customization options based on user feedback
-        st.sidebar.header("Customization")
-        if displayummary:
+        if displaysummary:
             st.write(df.describe())
         if enablescatter:
             st.header("Scatter Plot by Class")
