@@ -30,7 +30,7 @@ def app():
         # Data generation with balanced classes and informative features
         np.random.seed(42)  # For reproducibility
         num_samples = 100
-        feature1 = np.random.normal(5, 2, size=num_samples)
+        feature1 = np.random.normal(7, 3, size=num_samples)
         feature2 = np.random.normal(7, 3, size=num_samples)
 
         # Create informative classes based on features
