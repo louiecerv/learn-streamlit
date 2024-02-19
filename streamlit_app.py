@@ -12,7 +12,19 @@ def app():
         """This app generates  dataset with balanced classes 
         and informative features to facilitate exploration and analysis."""
         )
+    displaysummary = False
+    enablescatter = False
 
+    # Add interactivity and customization options based on user feedback
+    st.sidebar.header("Customization")
+    if st.sidebar.checkbox("Include data summary?"):
+        displaysummary = True
+    else:
+        displaysummary = False
+    if st.sidebar.checkbox("Enable feature scatter plot?"):
+        enablescatter = True
+    else:
+        enablescatter = False
     if st.button('Start'):
         # Data generation with balanced classes and informative features
         np.random.seed(42)  # For reproducibility
@@ -60,9 +72,9 @@ def app():
 
         # Add interactivity and customization options based on user feedback
         st.sidebar.header("Customization")
-        if st.sidebar.checkbox("Include data summary?"):
+        if displayummary:
             st.write(df.describe())
-        if st.sidebar.checkbox("Enable feature scatter plot?"):
+        if enablescatter:
             st.header("Scatter Plot by Class")
             colors = st.sidebar.color_picker("Choose class colors", ["#ff0000", "#00ff00", "#0000ff"])
             for i, class_name in enumerate(class_counts.index):
