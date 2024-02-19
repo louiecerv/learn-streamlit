@@ -6,34 +6,36 @@ from io import BytesIO
 
 # Define the Streamlit app
 def app():
-    # Data generation with balanced classes and informative features
-    np.random.seed(42)  # For reproducibility
-    num_samples = 100
-    feature1 = np.random.normal(5, 2, size=num_samples)
-    feature2 = np.random.normal(7, 3, size=num_samples)
-
-    # Create informative classes based on features
-    threshold = 8
-    classes = (feature1 + 2 * feature2) > threshold
-    labels = ['Class A' if label else 'Class B' for label in classes]
-
-    # Combine features and labels into a DataFrame
-    data = pd.DataFrame({
-        'Feature 1': feature1,
-        'Feature 2': feature2,
-        'Class': labels,
-    })
-
     # Display the DataFrame with formatting
     st.title("Sample Dataset with Features and Classes")
     st.write(
         "This dataset is generated with balanced classes and informative features to facilitate exploration and analysis."
-    )
-    st.dataframe(data.style.set_properties(
-        caption="Dataset Preview",
-        align="center",
-        index_label="#",
-    ))
+        )
+
+    if st.button('Start'):
+        # Data generation with balanced classes and informative features
+        np.random.seed(42)  # For reproducibility
+        num_samples = 100
+        feature1 = np.random.normal(5, 2, size=num_samples)
+        feature2 = np.random.normal(7, 3, size=num_samples)
+
+        # Create informative classes based on features
+        threshold = 8
+        classes = (feature1 + 2 * feature2) > threshold
+        labels = ['Class A' if label else 'Class B' for label in classes]
+
+        # Combine features and labels into a DataFrame
+        data = pd.DataFrame({
+            'Feature 1': feature1,
+            'Feature 2': feature2,
+            'Class': labels,
+        })
+
+        st.dataframe(data.style.set_properties(
+            caption="Dataset Preview",
+            align="center",
+            index_label="#",
+        ))
 
     # Add download button with enhanced error handling and feedback
     csv_file = BytesIO()
