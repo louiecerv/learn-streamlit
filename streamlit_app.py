@@ -13,7 +13,6 @@ def app():
         and informative features to facilitate exploration and analysis."""
         )
     displaysummary = False
-    enablescatter = False
 
     # Add interactivity and customization options based on user feedback
     st.sidebar.header("Customization")
@@ -57,28 +56,17 @@ def app():
         class_counts = df["Class"].value_counts().sort_index(ascending=False)
         st.bar_chart(class_counts)
 
-        # Optionally, create a scatter plot if features are available
-        if "Feature1" in df.columns and "Feature2" in df.columns:
-            st.header("Scatter Plot by Class")
-            colors = st.color_picker("Choose class colors", ["#ff0000", "#00ff00", "#0000ff"])
-            for i, class_name in enumerate(class_counts.index):
-                df_class = df[df["Class"] == class_name]
-                st.scatter(df_class["Feature1"], df_class["Feature2"], label=class_name, color=colors[i])
-            st.legend()
-
-        # Display other informative elements
-        st.header("Data Information")
-        st.write(df.describe())  # Include data summary
+        st.header("Scatter Plot by Class")
+        for i, class_name in enumerate(class_counts.index):
+            df_class = df[df["Class"] == class_name]
+            st.scatter(df_class["Feature1"], df_class["Feature2"], label=class_name)
+        st.legend()
 
         if displaysummary:
             st.write(df.describe())
-        if enablescatter:
-            st.header("Scatter Plot by Class")
-            colors = st.sidebar.color_picker("Choose class colors", ["#ff0000", "#00ff00", "#0000ff"])
-            for i, class_name in enumerate(class_counts.index):
-                df_class = df[df["Class"] == class_name]
-                st.scatter(df_class["Feature1"], df_class["Feature2"], label=class_name, color=colors[i])
-            st.legend()
+            # Display other informative elements
+            st.header("Data Information")
+            st.write(df.describe())  # Include data summary
 
         # Add download button with enhanced error handling and feedback
         csv_file = BytesIO()
