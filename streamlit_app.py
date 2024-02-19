@@ -56,12 +56,6 @@ def app():
         class_counts = df["Class"].value_counts().sort_index(ascending=False)
         st.bar_chart(class_counts)
 
-        st.header("Scatter Plot by Class")
-        for i, class_name in enumerate(class_counts.index):
-            df_class = df[df["Class"] == class_name]
-            st.scatter(df_class["Feature1"], df_class["Feature2"], label=class_name)
-        st.legend()
-
         if displaysummary:
             st.write(df.describe())
             # Display other informative elements
