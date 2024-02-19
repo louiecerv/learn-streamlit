@@ -13,17 +13,17 @@ def app():
         and informative features to facilitate exploration and analysis."""
         )
     displaysummary = False
-
+    enabledownload = False
     # Add interactivity and customization options based on user feedback
     st.sidebar.header("Customization")
     if st.sidebar.checkbox("Include data summary?"):
         displaysummary = True
     else:
         displaysummary = False
-    if st.sidebar.checkbox("Enable feature scatter plot?"):
-        enablescatter = True
+    if st.sidebar.checkbox("Enable download?"):
+        enabledownload = True
     else:
-        enablescatter = False
+        enabledownload = False
     if st.button('Start'):
         # Data generation with balanced classes and informative features
         np.random.seed(42)  # For reproducibility
@@ -61,27 +61,26 @@ def app():
             # Display other informative elements
             st.header("Data Information")
             st.write(df.describe())  # Include data summary
+        if enabledownload:
+            # Add download button with enhanced error handling and feedback
+            csv_file = BytesIO()
+            data.to_csv(csv_file, index=False)
+            csv_file.seek(0)
 
-        # Add download button with enhanced error handling and feedback
-        csv_file = BytesIO()
-        data.to_csv(csv_file, index=False)
-        csv_file.seek(0)
+            download_button = st.download_button(
+                label="Download CSV",
+                data=csv_file,
+                file_name="dataset.csv",
+                mime="text/csv",
+                on_click=None,  # Disable immediate download on page load
+            )
 
-        download_button = st.download_button(
-            label="Download CSV",
-            data=csv_file,
-            file_name="dataset.csv",
-            mime="text/csv",
-            on_click=None,  # Disable immediate download on page load
-        )
-
-        if download_button:
-            try:
-                st.success("Download successful!")
-            except Exception as e:
-                st.error(f"Download failed: {e}")
-
-        st.write("You can now explore and analyze this dataset for various purposes.")
+            if download_button:
+                try:
+                    st.success("Download successful!")
+                except Exception as e:
+                    st.error(f"Download failed: {e}")
+                st.write("You can now explore and analyze this dataset for various purposes.")
     
 #run the app
 if __name__ == "__main__":
