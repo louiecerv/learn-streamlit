@@ -42,16 +42,16 @@ def app():
 
         # Create a histogram of class frequencies
         st.header("Class Distribution")
-        class_counts = df["class"].value_counts().sort_index(ascending=False)
+        class_counts = df["Class"].value_counts().sort_index(ascending=False)
         st.bar_chart(class_counts)
 
         # Optionally, create a scatter plot if features are available
-        if "feature1" in df.columns and "feature2" in df.columns:
+        if "Feature1" in df.columns and "Feature2" in df.columns:
             st.header("Scatter Plot by Class")
             colors = st.color_picker("Choose class colors", ["#ff0000", "#00ff00", "#0000ff"])
             for i, class_name in enumerate(class_counts.index):
-                df_class = df[df["class"] == class_name]
-                st.scatter(df_class["feature1"], df_class["feature2"], label=class_name, color=colors[i])
+                df_class = df[df["Class"] == class_name]
+                st.scatter(df_class["Feature1"], df_class["Feature2"], label=class_name, color=colors[i])
             st.legend()
 
         # Display other informative elements
@@ -66,8 +66,8 @@ def app():
             st.header("Scatter Plot by Class")
             colors = st.sidebar.color_picker("Choose class colors", ["#ff0000", "#00ff00", "#0000ff"])
             for i, class_name in enumerate(class_counts.index):
-                df_class = df[df["class"] == class_name]
-                st.scatter(df_class["feature1"], df_class["feature2"], label=class_name, color=colors[i])
+                df_class = df[df["Class"] == class_name]
+                st.scatter(df_class["Feature1"], df_class["Feature2"], label=class_name, color=colors[i])
             st.legend()
 
         # Add download button with enhanced error handling and feedback
