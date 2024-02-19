@@ -2,6 +2,8 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
 from io import BytesIO
 
 # Define the Streamlit app
@@ -51,10 +53,14 @@ def app():
 
         df = pd.DataFrame(data)
 
-        # Create a histogram of class frequencies
-        st.header("Class Distribution")
-        class_counts = df["Class"].value_counts().sort_index(ascending=False)
-        st.bar_chart(class_counts)
+        fig, ax = plt.subplots()
+        # Create the horizontal barplot
+        sns.countplot(y='Class', data=df, hue='Class', palette='bright', ax=ax)
+
+        # Add the title
+        ax.set_title('Plot of Target Class Distribution')
+        # Display the plot using Streamlit
+        st.pyplot(fig)
 
         if displaysummary:
             # Display other informative elements
